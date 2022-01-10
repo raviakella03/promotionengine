@@ -28,6 +28,7 @@ class PriceCalculatorTest {
         activePromotions.put("3A", 130.0);
         activePromotions.put("2B", 45.0);
         activePromotions.put("1C+1D", 30.0);
+        activePromotions.put("1A+1D", 50.0);
     }
 
     @AfterEach
@@ -89,4 +90,14 @@ class PriceCalculatorTest {
         assertEquals(expectedOutput, new PriceCalculator().priceCalculator(unitPrice, activePromotions, purchasedProducts));
     }
 
+    @Test
+    void scenario7() {
+        //to check if the promotion is mutually exclusive or not
+        purchasedProducts.put("A", 4);//130+50=180
+        purchasedProducts.put("B", 5);//90+30=120
+        purchasedProducts.put("C", 1);
+        purchasedProducts.put("D", 2);//30+15=45
+        double expectedOutput = 345;
+        assertEquals(expectedOutput, new PriceCalculator().priceCalculator(unitPrice, activePromotions, purchasedProducts));
+    }
 }
