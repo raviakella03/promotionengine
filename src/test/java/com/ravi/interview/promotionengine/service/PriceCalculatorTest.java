@@ -32,6 +32,8 @@ class PriceCalculatorTest {
 
     @AfterEach
     void cleanUp() {
+        unitPrice.clear();
+        activePromotions.clear();
         purchasedProducts.clear();
     }
 
