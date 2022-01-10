@@ -33,9 +33,24 @@ class PriceCalculatorTest {
 
     @AfterEach
     void cleanUp() {
-        unitPrice.clear();
-        activePromotions.clear();
-        purchasedProducts.clear();
+        if (null != unitPrice && null != activePromotions && null != purchasedProducts) {
+            unitPrice.clear();
+            activePromotions.clear();
+            purchasedProducts.clear();
+        }
+    }
+
+    @Test
+    void nullScenario() {
+        //null check - returns -1
+        purchasedProducts.put("A", 4);//130+50=180
+        purchasedProducts.put("B", 5);//90+30=120
+        purchasedProducts.put("C", 1);
+        purchasedProducts.put("D", 2);//30+15=45
+        //Forcing null
+        unitPrice = null;
+        double expectedOutput = -1;
+        assertEquals(expectedOutput, new PriceCalculator().priceCalculator(unitPrice, activePromotions, purchasedProducts));
     }
 
     @Test
